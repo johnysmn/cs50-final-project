@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, inicial-scale=1.0">
+        <title>{{ game.name }} - Details</title>
+{% endblock %}
+{% block content %}
+        <nav>
+            <a href="/">Back to search</a>
+            {% if session.user_id %}
+            <a href="/logout">Log Out</a>
+            {% else %}
+            <a href="/login">Log In</a>
+            {% endif %}
+        </nav>
+        <hr>
+        <h1>{{ game.name }}</h1>
+        <img src="{{ game.background_image }}" alt="Cover for {{ game.name }}" width="400">
+        <h3>Release Data: {{ game.released }}</h3>
+        <h3>Metacritic Rating: {{ game.metacritic }}</h3>
+        <h4>Description:</h4>
+        <p>{{ game.decription_raw | safe }}</p>
+        <a href="{{ game.website }}" target="_blank">Official Website</a>
+        <hr>
+        <h2>User Reviews</h2>
+        {% if session.user_id %}
+        <form action="" method="post">
+            <h4>Write your own review:</h4>
+            <div>
+                <label for="rating">Rating:</label>
+                <select name="rating" id="rating">
+                    <option disabled selected value="">--Choose a rating--</option>
+                    <option value="5">5- Masterpiece</option>
+                    <option value="4">4- Great</option>
+                    <option value="3">3- Good</option>
+                    <option value="2">2- Fair</option>
+                    <option value="1">1- Poor</option>
+                </select>
+            </div>
+            <div>
+                <label for="content">Reviews:</label>
+                <br>
+                <textarea id="content" name="content" rows="4" cols="50" placeholder="What did you think?"></textarea>
+            </div>
+            <button type="submit">Submit Review</button>
+        </form>
+        <hr>
+        {% endif %}
+        {% if reviews %}
+        {% for review in reviews %}
+        <div>
+            <p>
+                <strong>{{ review.username }}</strong> rated it <strong>{{ review.rating }}/5</strong>
+            </p>
+            <blockquote>"{{ review.content }}"</blockquote>
+        </div>
+        <hr>
+        {% endfor %}
+        {% else %}
+        <p>No reviews yet. Be the first to write one!</p>
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Results</title>
+{% endblock %}
+
+{% block content %}
+        <h1>Search Results</h1>
+        {% if games %}
+        <ul>
+            {% for game in games %}
+            <li>
+                <img src="{{ game.background_image }}" alt="Cover of {{ game.name }}" width="200">
+                <h2>{{ game.name }}</h2>
+                <p>Released: {{ game.released }}</p>
+                <a href="/game/{{ game.id }}">View Details & Reviews</a>
+            </li>
+            <hr>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No games found for your query.</p>
+        {% endif %}
+        <a href="/">Back to search</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Game Reviews</title>
+{% endblock %}
+{% block content %}
+        <nav>
+            {% if session.user_id %}
+            <span>Welcome, {{ username }}!</span>
+            <a href="/logout">Log Out</a>
+            {% else %}
+            <a href="login">Log In</a>
+            <a href="/register">Register</a>
+            {% endif %}
+        </nav>
+        <hr>
+        <h1>Welcome to the Game Review Site!</h1>
+        <form action="/search" method="post">
+            <input autocomplete="off" autofocus name="query" placeholder="Search for a game..." type="text">
+            <button type="submit">Search</button>
+        </form>
+        <p>Search for a game to get started.</p>
+{% endblock %}
