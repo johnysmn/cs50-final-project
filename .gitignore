@@ -1,0 +1,9 @@
+# Configurações do Editor
+.vscode/
+
+# Banco de Dados Local
+project.db
+
+# Cache e arquivos compilados do Python
+__pycache__/
+*.pyc
